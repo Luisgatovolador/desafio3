@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/desafio3.git/static/css/main.dc4d6ff2.css",
+    "main.js": "/desafio3.git/static/js/main.27d74562.js",
+    "index.html": "/desafio3.git/index.html",
+    "main.dc4d6ff2.css.map": "/desafio3.git/static/css/main.dc4d6ff2.css.map",
+    "main.27d74562.js.map": "/desafio3.git/static/js/main.27d74562.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dc4d6ff2.css",
+    "static/js/main.27d74562.js"
+  ]
+}
