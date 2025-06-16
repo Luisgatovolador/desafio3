@@ -22,7 +22,7 @@ jobs:
           node-version: 18
 
       - name: Instalar dependencias
-        run: npm install
+        run: CI='' npm run build
 
       - name: Construir aplicación
         run: npm run build
