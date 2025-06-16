@@ -1,33 +1,33 @@
-name: Deploy React App to GitHub Pages
+name: Despliega
 
 on:
   push:
     branches:
       - main
-
-permissions:
-  contents: write
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clonar repositorio
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Instalar Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      - name: Instalar dependencias
+      - name: Install dependencies
         run: npm install
 
-      - name: Construir aplicación
+      - name: Build the app
         run: npm run build
 
-      - name: Subir a GitHub Pages
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
