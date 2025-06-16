@@ -11,6 +11,7 @@ RUN npm install
 # Copiar el resto
 COPY . .
 
+
 # Construye la app para producción
 RUN npm run build
 
