@@ -14,7 +14,7 @@ function About() {
 
 function App() {
     return (
-        <BrowserRouter>
+       <BrowserRouter basename="/desafio3">
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
