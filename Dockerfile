@@ -1,18 +1,25 @@
+# Etapa 1: Construcción de la app React
+FROM node:24-alpine as build
 
-# Imagen Node dependiendo de versión instalada 
-FROM node:24
-
-# Establece el directorio de trabajo 
 WORKDIR /app
 
-# Copia los archivos del proyecto
-COPY package.json package-lock.json ./ 
+COPY package.json package-lock.json ./
 RUN npm install
 
 COPY . .
+RUN npm run build
 
-# Expone el puerto de React 
-EXPOSE 3000
+# Etapa 2: Servir la app con Nginx
+FROM nginx:alpine
 
-# Ejecuta la aplicación en desarrollo 
-CMD ["npm", "start"]
+# Copiar los archivos de build al directorio que Nginx sirve
+COPY --from=build /app/build /usr/share/nginx/html
+
+# Copiar archivo de configuración personalizado de Nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Exponer puerto 80
+EXPOSE 80
+
+# Iniciar Nginx en primer plano
+CMD ["nginx", "-g", "daemon off;"]
