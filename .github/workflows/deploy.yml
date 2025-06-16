@@ -1,34 +1,28 @@
-name: Despliega
-
+name: Docker 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Clonar el repositorio
+        uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
+      - name: Construir imagen Docker
+        run: docker build -t react-ghpages .
 
-      - name: Install dependencies
-        run: npm install
+      - name: Extraer el build del contenedor
+        run: |
+          CONTAINER_ID=$(docker create react-ghpages)
+          docker cp $CONTAINER_ID:/app/build ./build
+          docker rm $CONTAINER_ID
 
-      - name: Build the app
-        run: npm run build
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Publicar en GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
