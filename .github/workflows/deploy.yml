@@ -1,4 +1,4 @@
-name: Desafio 3
+name: Deploy React App to GitHub Pages
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
           node-version: 18
 
       - name: Instalar dependencias
-        run: npm run build
+        run: npm install
 
       - name: Construir aplicación
         run: npm run build
